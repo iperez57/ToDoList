@@ -8,7 +8,15 @@
         {
         }
         [TestMethod]
+        public void AddATaskWithoutTitle()
+        {
+        }
+        [TestMethod]
         public void DeleteATask()
+        {
+        }
+        [TestMethod]
+        public void DeleteANonexistingTask()
         {
         }
         [TestMethod]
@@ -16,11 +24,31 @@
         {
         }
         [TestMethod]
+        public void EditANonexistingTask()
+        {
+        }
+        [TestMethod]
         public void MarkTaskAsComplete()
         {
         }
         [TestMethod]
+        public void UnmarkTaskAsComplete()
+        {
+        }
+        [TestMethod]
+        public void CheckInvalidDueDates()
+        {
+        }
+        [TestMethod]
+        public void CantAddDuplicateTasks()
+        {
+        }
+        [TestMethod]
         public void ViewAllTasks()
+        {
+        }
+        [TestMethod]
+        public void SearchForATask()
         {
         }
         [TestMethod]
