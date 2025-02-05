@@ -26,6 +26,18 @@
             Assert.AreEqual(1, toDoList.Count);
             //Verified that the list has one item in it
 
+            /*
+            UniqueList<UniqueList<string>> toDoList = new UniqueList<UniqueList<string>>();
+            UniqueList<string> task1 = new UniqueList<string>();
+            task1.Add("Task 1"); //listitems
+            toDoList.Add(task1);
+            Assert.AreEqual(1, toDoList.Count);
+            //Due Dates for tasks
+            //Priority for listitems
+            //Completion status for list items then tasks
+            //Date when task is created
+            */
+
         }
         [TestMethod]
         public void CheckValueofAddedTaskisCorrect()
@@ -133,7 +145,7 @@
         public void ViewAllTasks()
         {
             //Just have to print out List
-        } 
+        }
         #endregion
     }
 }
