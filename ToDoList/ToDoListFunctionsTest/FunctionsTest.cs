@@ -176,6 +176,19 @@ namespace ToDoListFunctionsTest
         [TestMethod]
         public void SetTaskPriority()
         {
+            UniqueList<TaskList<string>> toDoList = new UniqueList<TaskList<string>>();
+            TaskList<string> cleanHouse = new TaskList<string>();
+            TaskList<string> walkDogs= new TaskList<string>();
+            TaskList<string> goToGym = new TaskList<string>();
+            cleanHouse.Priority = "High";
+            walkDogs.Priority = "Low";
+            goToGym.Priority = "Medium";
+
+            
+            Assert.AreEqual("High", cleanHouse.Priority);
+            Assert.AreEqual("Medium", goToGym.Priority);
+            Assert.AreEqual("Low", walkDogs.Priority);
+
             //We would need to add a priority attribute to the task
         }
         [TestMethod]
