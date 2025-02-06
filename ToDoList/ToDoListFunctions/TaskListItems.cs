@@ -10,7 +10,7 @@ namespace ToDoListFunctions
     {
         public int ItemListCompletedCount { get; set; }
         public bool IsCompleted { get; set; } = false;
-        public DateTime? DueDate { get; set; }
+        public DateTime? DueDate { get; set; } = null;
         public string Priority { get; set; }
         public DateTime DateModified { get; set; } = DateTime.Now;
         public string DateCreated { get; set; }

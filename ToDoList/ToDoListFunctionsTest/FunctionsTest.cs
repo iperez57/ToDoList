@@ -151,6 +151,16 @@ namespace ToDoListFunctionsTest
         [TestMethod]
         public void SetTaskDueDate()
         {
+
+        }
+        [TestMethod]
+        public void SetTaskDueDateNull()
+        {
+            UniqueList<TaskList<string>> toDoList = new UniqueList<TaskList<string>>();
+            TaskList<string> cleanHouse = new TaskList<string>();
+            cleanHouse.DueDate = null;
+
+            Assert.IsNull(cleanHouse.DueDate);
             //We would need to add a due date attribute to the task
         }
         [TestMethod]
