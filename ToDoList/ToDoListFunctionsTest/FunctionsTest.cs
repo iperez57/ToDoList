@@ -6,9 +6,36 @@ namespace ToDoListFunctionsTest
     public sealed class FunctionsTest
     {
         #region Task Management
-        //Step 1
         [TestMethod]
         public void CreateNewToDoList()
+        {
+            UniqueList<TaskList<string>> toDoList = new UniqueList<TaskList<string>>();
+            TaskList<string> cleanHouse = new TaskList<string>();
+            toDoList.Add(cleanHouse);
+            Assert.IsNotNull(toDoList);
+            Assert.IsNotNull(cleanHouse);
+        }
+        public void CreateSingleNewTaskListinToDoList()
+        {
+            UniqueList<TaskList<string>> toDoList = new UniqueList<TaskList<string>>();
+            TaskList<string> cleanHouse = new TaskList<string>();
+            toDoList.Add(cleanHouse);
+            Assert.IsNotNull(cleanHouse);
+            Assert.AreEqual(1, toDoList.Count);
+        }
+        public void CreateMultipleNewTaskListinToDoList()
+        {
+            UniqueList<TaskList<string>> toDoList = new UniqueList<TaskList<string>>();
+            TaskList<string> cleanHouse = new TaskList<string>();
+            TaskList<string> payBills = new TaskList<string>();
+            toDoList.Add(cleanHouse);
+            toDoList.Add(payBills);
+            Assert.IsNotNull(payBills);
+            Assert.IsNotNull(cleanHouse);
+        }
+        //Step 2
+        [TestMethod]
+        public void AddAListItemsToATaskList()
         {
             UniqueList<TaskList<string>> toDoList = new UniqueList<TaskList<string>>();
             TaskList<string> cleanHouse = new TaskList<string>();
@@ -16,79 +43,115 @@ namespace ToDoListFunctionsTest
             cleanHouse.Add("Sweep");
             cleanHouse.Add("Dust");
             toDoList.Add(cleanHouse);
-            Assert.AreEqual(1, toDoList.Count);
-            //Verified that the list is not null (since an instance of the list is created, it would not be null)
+            Assert.AreEqual(3, cleanHouse.Count);
         }
-        //Step 2
         [TestMethod]
-        public void AddATask()
+        public void CheckValueofAddedTaskListisCorrect()
         {
-            UniqueList<string> toDoList = new UniqueList<string>();
-            toDoList.Add("Task 1");
-            Assert.AreEqual(1, toDoList.Count);
-            //Verified that the list has one item in it
-
-            /*
             UniqueList<TaskList<string>> toDoList = new UniqueList<TaskList<string>>();
-            UniqueList<string> task1 = new UniqueList<string>();
-            task1.Add("Task 1"); //listitems
-            toDoList.Add(task1);
-            Assert.AreEqual(1, toDoList.Count);
-            //Due Dates for tasks
-            //Priority for listitems
-            //Completion status for list items then tasks
-            //Date when task is created
-            */
+            TaskList<string> cleanHouse = new TaskList<string>();
+            TaskList<string> payBills = new TaskList<string>();
+            toDoList.Add(cleanHouse);
+            toDoList.Add(payBills);
+            Assert.AreEqual(toDoList[1], payBills);
+            Assert.AreEqual(toDoList[0], cleanHouse);
 
         }
         [TestMethod]
-        public void CheckValueofAddedTaskisCorrect()
+        public void CheckValueofAddedListItemisCorrect()
         {
-            UniqueList<string> toDoList = new UniqueList<string>();
-            toDoList.Add("Task 1");
-            Assert.AreEqual("Task 1", toDoList[0]);
-
+            UniqueList<TaskList<string>> toDoList = new UniqueList<TaskList<string>>();
+            TaskList<string> cleanHouse = new TaskList<string>();
+            cleanHouse.Add("Mop"); //listitems
+            cleanHouse.Add("Sweep");
+            cleanHouse.Add("Dust");
+            toDoList.Add(cleanHouse);
+            Assert.AreEqual(cleanHouse[0], "Mop");
+            Assert.AreEqual(cleanHouse[1], "Sweep");
+            Assert.AreEqual(cleanHouse[2], "Dust");
         }
         [TestMethod]
-        public void CantAddDuplicateTasks()
+        public void CantAddDuplicateListItems()
         {
-            UniqueList<string> toDoList = new UniqueList<string>();
-            toDoList.Add("Task 1");
-            toDoList.Add("Task 1");
-            //Would need to create a method to check for duplicates after each .Add and to not add them
-            Assert.AreEqual(1, toDoList.Count);
+            UniqueList<TaskList<string>> toDoList = new UniqueList<TaskList<string>>();
+            TaskList<string> cleanHouse = new TaskList<string>();
+            cleanHouse.Add("Mop"); //listitems
+            cleanHouse.Add("Mop");
+            cleanHouse.Add("Dust");
+            toDoList.Add(cleanHouse);
+            Assert.AreEqual(2, cleanHouse.Count);
+            Assert.AreEqual(cleanHouse[0], "Mop");
+            Assert.AreEqual(cleanHouse[1], "Dust");
         }
-        //Step 3
         [TestMethod]
-        public void DeleteATaskByTaskString()
+        public void DeleteAListItemByString()
         {
-            UniqueList<string> toDoList = new UniqueList<string>();
-            toDoList.Add("Task 1");
-            toDoList.Remove("Task 1");
+            UniqueList<TaskList<string>> toDoList = new UniqueList<TaskList<string>>();
+            TaskList<string> cleanHouse = new TaskList<string>();
+            cleanHouse.Add("Mop"); //listitems
+            cleanHouse.Remove("Mop");
             Assert.AreEqual(0, toDoList.Count);
         }
         [TestMethod]
-        public void DeleteATaskByIndex()
+        public void DeleteAListItemByIndex()
         {
-            UniqueList<string> toDoList = new UniqueList<string>();
-            toDoList.Add("Task 1");
-            toDoList.Add("Task 2");
-            toDoList.Add("Task 3");
-            toDoList.RemoveAt(1);
-            Assert.AreEqual(2, toDoList.Count);
-            Assert.AreEqual("Task 1", toDoList[0]);
-            Assert.AreEqual("Task 3", toDoList[1]);
+            UniqueList<TaskList<string>> toDoList = new UniqueList<TaskList<string>>();
+            TaskList<string> cleanHouse = new TaskList<string>();
+            cleanHouse.Add("Mop"); //listitems
+            cleanHouse.Add("Sweep");
+            cleanHouse.Add("Dust");
+            toDoList.Add(cleanHouse);
+            cleanHouse.RemoveAt(0);
+            Assert.AreEqual(2, cleanHouse.Count);
+            Assert.AreEqual(cleanHouse[0], "Sweep");
+            Assert.AreEqual(cleanHouse[1], "Dust");
         }
         [TestMethod]
-        public void EditATask()
+        public void EditAListItem()
         {
-            UniqueList<string> toDoList = new UniqueList<string>();
-            toDoList.Add("Task 1");
-            toDoList[0] = "Task 2";
-            Assert.AreEqual("Task 2", toDoList[0]);
+            UniqueList<TaskList<string>> toDoList = new UniqueList<TaskList<string>>();
+            TaskList<string> cleanHouse = new TaskList<string>();
+            cleanHouse.Add("Mop"); //listitems
+            toDoList.Add(cleanHouse);
+            Assert.AreEqual(cleanHouse[0], "Mop");
+            cleanHouse[0] = "Sweep";
+            Assert.AreEqual(cleanHouse[0], "Sweep");
         }
         #endregion
         #region Task Status
+        [TestMethod]
+        public void MarkListItemAsComplete()
+        {
+            UniqueList<TaskList<string>> toDoList = new UniqueList<TaskList<string>>();
+            TaskList<string> cleanHouse = new TaskList<string>();
+            cleanHouse.Add("Mop"); //listitems
+            cleanHouse.Add("Sweep");
+            cleanHouse.Add("Dust");
+            toDoList.Add(cleanHouse);
+            cleanHouse.ListItemCompleted("Mop");
+            cleanHouse.ListItemCompleted("Sweep");
+            Assert.AreEqual(2, cleanHouse.ItemListCompletedCount);
+
+        }
+        [TestMethod]
+        public void UnmarkListItemAsComplete()
+        {
+            UniqueList<TaskList<string>> toDoList = new UniqueList<TaskList<string>>();
+            TaskList<string> cleanHouse = new TaskList<string>();
+            cleanHouse.Add("Mop"); //listitems
+            cleanHouse.Add("Sweep");
+            cleanHouse.Add("Dust");
+            toDoList.Add(cleanHouse);
+
+            cleanHouse.TaskIsCompleted(cleanHouse);
+            Assert.AreEqual(false, cleanHouse.TaskIsCompleted(cleanHouse));
+            cleanHouse.ListItemCompleted("Mop");
+            cleanHouse.ListItemCompleted("Sweep");
+            cleanHouse.ListItemCompleted("Dust");
+            cleanHouse.ListItemIncompleted("Mop");
+            Assert.AreEqual(false, cleanHouse.TaskIsCompleted(cleanHouse));
+            Assert.AreEqual(2, cleanHouse.ItemListCompletedCount);
+        }
         [TestMethod]
         public void MarkTaskAsComplete()
         {
@@ -107,26 +170,6 @@ namespace ToDoListFunctionsTest
             Assert.AreEqual(true, cleanHouse.TaskIsCompleted(cleanHouse));
             Assert.AreEqual(3, cleanHouse.ItemListCompletedCount);
 
-        }
-
-        [TestMethod]
-        public void UnmarkTaskAsComplete()
-        {
-            UniqueList<TaskList<string>> toDoList = new UniqueList<TaskList<string>>();
-            TaskList<string> cleanHouse = new TaskList<string>();
-            cleanHouse.Add("Mop"); //listitems
-            cleanHouse.Add("Sweep");
-            cleanHouse.Add("Dust");
-            toDoList.Add(cleanHouse);
-
-            cleanHouse.TaskIsCompleted(cleanHouse);
-            Assert.AreEqual(false, cleanHouse.TaskIsCompleted(cleanHouse));
-            cleanHouse.ListItemCompleted("Mop");
-            cleanHouse.ListItemCompleted("Sweep");
-            cleanHouse.ListItemCompleted("Dust");
-            cleanHouse.ListItemIncompleted("Mop");
-            Assert.AreEqual(false, cleanHouse.TaskIsCompleted(cleanHouse));
-            Assert.AreEqual(2, cleanHouse.ItemListCompletedCount);
         }
         #endregion
         #region Task Attributes
