@@ -1,20 +1,22 @@
-﻿namespace ToDoListFunctionsTest
+﻿using ToDoListFunctions;
+
+namespace ToDoListFunctionsTest
 {
     [TestClass]
     public sealed class FunctionsTest
     {
-        //Step 1: Create the to do list
-        //Step 2: Add a task
-        //Step 3: Delete a task
         #region Task Management
         //Step 1
         [TestMethod]
         public void CreateNewToDoList()
         {
-            UniqueList<string> toDoList = new UniqueList<string>();
-
-            toDoList.Add("Task 1");
-            Assert.IsNotNull(toDoList);
+            UniqueList<TaskList<string>> toDoList = new UniqueList<TaskList<string>>();
+            TaskList<string> cleanHouse = new TaskList<string>();
+            cleanHouse.Add("Mop"); //listitems
+            cleanHouse.Add("Sweep");
+            cleanHouse.Add("Dust");
+            toDoList.Add(cleanHouse);
+            Assert.AreEqual(1, toDoList.Count);
             //Verified that the list is not null (since an instance of the list is created, it would not be null)
         }
         //Step 2
@@ -27,7 +29,7 @@
             //Verified that the list has one item in it
 
             /*
-            UniqueList<UniqueList<string>> toDoList = new UniqueList<UniqueList<string>>();
+            UniqueList<TaskList<string>> toDoList = new UniqueList<TaskList<string>>();
             UniqueList<string> task1 = new UniqueList<string>();
             task1.Add("Task 1"); //listitems
             toDoList.Add(task1);
@@ -86,19 +88,45 @@
             Assert.AreEqual("Task 2", toDoList[0]);
         }
         #endregion
-        //Step 1: Create the to do list
-        //Step 2: Add a task
-        //Step 3: Delete a task
         #region Task Status
         [TestMethod]
         public void MarkTaskAsComplete()
         {
-            //Add a bool or method in the UniqueList class to mark the task is complete
+            UniqueList<TaskList<string>> toDoList = new UniqueList<TaskList<string>>();
+            TaskList<string> cleanHouse = new TaskList<string>();
+            cleanHouse.Add("Mop"); //listitems
+            cleanHouse.Add("Sweep");
+            cleanHouse.Add("Dust");
+            toDoList.Add(cleanHouse);
+
+            cleanHouse.TaskIsCompleted(cleanHouse);
+            Assert.AreEqual(false, cleanHouse.TaskIsCompleted(cleanHouse));
+            cleanHouse.ListItemCompleted("Mop");
+            cleanHouse.ListItemCompleted("Sweep");
+            cleanHouse.ListItemCompleted("Dust");
+            Assert.AreEqual(true, cleanHouse.TaskIsCompleted(cleanHouse));
+            Assert.AreEqual(3, cleanHouse.ItemListCompletedCount);
+
         }
+
         [TestMethod]
         public void UnmarkTaskAsComplete()
         {
-            //All Tasks should be incomplete by default, so this would be a method to unmark a task noted as complete (maybe use a reset to default method)
+            UniqueList<TaskList<string>> toDoList = new UniqueList<TaskList<string>>();
+            TaskList<string> cleanHouse = new TaskList<string>();
+            cleanHouse.Add("Mop"); //listitems
+            cleanHouse.Add("Sweep");
+            cleanHouse.Add("Dust");
+            toDoList.Add(cleanHouse);
+
+            cleanHouse.TaskIsCompleted(cleanHouse);
+            Assert.AreEqual(false, cleanHouse.TaskIsCompleted(cleanHouse));
+            cleanHouse.ListItemCompleted("Mop");
+            cleanHouse.ListItemCompleted("Sweep");
+            cleanHouse.ListItemCompleted("Dust");
+            cleanHouse.ListItemIncompleted("Mop");
+            Assert.AreEqual(false, cleanHouse.TaskIsCompleted(cleanHouse));
+            Assert.AreEqual(2, cleanHouse.ItemListCompletedCount);
         }
         #endregion
         #region Task Attributes
@@ -149,3 +177,5 @@
         #endregion
     }
 }
+
+//todo list: fix task management test cases, finish test task attributes tomorrow
