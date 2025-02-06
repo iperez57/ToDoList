@@ -180,14 +180,14 @@ namespace ToDoListFunctionsTest
             TaskList<string> cleanHouse = new TaskList<string>();
             TaskList<string> walkDogs= new TaskList<string>();
             TaskList<string> goToGym = new TaskList<string>();
-            cleanHouse.Priority = "High";
-            walkDogs.Priority = "Low";
-            goToGym.Priority = "Medium";
+            cleanHouse.Priority = TaskPriority.High;
+            walkDogs.Priority = TaskPriority.Medium;
+            goToGym.Priority = TaskPriority.Low;
 
-            
-            Assert.AreEqual("High", cleanHouse.Priority);
-            Assert.AreEqual("Medium", goToGym.Priority);
-            Assert.AreEqual("Low", walkDogs.Priority);
+
+            Assert.AreEqual(TaskPriority.High, cleanHouse.Priority);
+            Assert.AreEqual(TaskPriority.Medium, walkDogs.Priority);
+            Assert.AreEqual(TaskPriority.Low, goToGym.Priority);
 
             //We would need to add a priority attribute to the task
         }
