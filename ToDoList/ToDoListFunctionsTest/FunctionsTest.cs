@@ -194,14 +194,17 @@ namespace ToDoListFunctionsTest
         [TestMethod]
         public void SetTaskDueDate()
         {
-
+            UniqueList<TaskList<string>> toDoList = new UniqueList<TaskList<string>>();
+            TaskList<string> cleanHouse = new TaskList<string>();
+            cleanHouse.SetDueDate(2025, 02, 06);
+            string result = "Thursday, February 6, 2025";
+            Assert.AreEqual(result, cleanHouse.DueDate);
         }
         [TestMethod]
-        public void SetTaskDueDateNull()
+        public void CreateTaskDueDate()
         {
             UniqueList<TaskList<string>> toDoList = new UniqueList<TaskList<string>>();
             TaskList<string> cleanHouse = new TaskList<string>();
-            cleanHouse.DueDate = null;
 
             Assert.IsNull(cleanHouse.DueDate);
             //We would need to add a due date attribute to the task
@@ -209,6 +212,11 @@ namespace ToDoListFunctionsTest
         [TestMethod]
         public void CheckInvalidDueDates()
         {
+            UniqueList<TaskList<string>> toDoList = new UniqueList<TaskList<string>>();
+            TaskList<string> cleanHouse = new TaskList<string>();
+            cleanHouse.SetDueDate(2025, 02, 07);
+            string result = "Friday, February 7, 2025";
+            Assert.AreEqual(result, cleanHouse.DueDate);
             //This should be a method in the due date attribute
         }
         #endregion

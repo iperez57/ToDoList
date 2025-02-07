@@ -16,16 +16,28 @@ namespace ToDoListFunctions
     {
         public int ItemListCompletedCount { get; set; }
         public bool IsCompleted { get; set; } = false;
-        public DateTime? DueDate { get; set; } = null;
+        public string DueDate { get; set; } = null;
         public TaskPriority Priority { get; set; }
-        public DateTime DateModified { get; set; } = DateTime.Now;
-        public string DateCreated { get; set; }
+        public DateTime DateModified { get; set; }
+        public DateTime DateCreated { get; set; }
 
         public TaskList()
         {
-            DateCreated = DateTime.Now.ToString("MM/dd/yyyy");
-         
+            DateCreated = DateTime.Today;
+            DateModified = DateTime.Today;
+            DateCreated.ToString("D");
+            DateModified.ToString("D");
         }
+
+        public void SetDueDate(int year, int month, int day)
+        {
+            DateTime dueDate = new DateTime(year, month, day);
+            if (dueDate >= DateTime.Today)
+            {
+                DueDate = dueDate.ToString("D");
+            }
+        }
+
         public int ListItemCompleted(T item)
         {
             return ItemListCompletedCount++;
