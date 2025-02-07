@@ -17,6 +17,7 @@ namespace ToDoListFunctions
         public int ItemListCompletedCount { get; set; }
         public bool IsCompleted { get; set; } = false;
         public string DueDate { get; set; } = null;
+        public DateTime DueDateActual { get; set; }
         public TaskPriority Priority { get; set; }
         public DateTime DateModified { get; set; }
         public DateTime DateCreated { get; set; }
@@ -34,6 +35,7 @@ namespace ToDoListFunctions
             DateTime dueDate = new DateTime(year, month, day);
             if (dueDate >= DateTime.Today)
             {
+                DueDateActual = dueDate;
                 DueDate = dueDate.ToString("D");
             }
         }
