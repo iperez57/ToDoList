@@ -129,8 +129,8 @@ namespace ToDoListFunctionsTest
             cleanHouse.Add("Sweep");
             cleanHouse.Add("Dust");
             toDoList.Add(cleanHouse);
-            cleanHouse.ListItemCompleted("Mop");
-            cleanHouse.ListItemCompleted("Sweep");
+            cleanHouse.ListItemCompleted(cleanHouse, "Mop");
+            cleanHouse.ListItemCompleted(cleanHouse, "Sweep");
             Assert.AreEqual(2, cleanHouse.ItemListCompletedCount);
 
         }
@@ -146,10 +146,10 @@ namespace ToDoListFunctionsTest
 
             cleanHouse.TaskIsCompleted(cleanHouse);
             Assert.AreEqual(false, cleanHouse.TaskIsCompleted(cleanHouse));
-            cleanHouse.ListItemCompleted("Mop");
-            cleanHouse.ListItemCompleted("Sweep");
-            cleanHouse.ListItemCompleted("Dust");
-            cleanHouse.ListItemIncompleted("Mop");
+            cleanHouse.ListItemCompleted(cleanHouse, "Mop");
+            cleanHouse.ListItemCompleted(cleanHouse, "Sweep");
+            cleanHouse.ListItemCompleted(cleanHouse, "Dust");
+            cleanHouse.ListItemIncompleted(cleanHouse, "Mop");
             Assert.AreEqual(false, cleanHouse.TaskIsCompleted(cleanHouse));
             Assert.AreEqual(2, cleanHouse.ItemListCompletedCount);
         }
@@ -165,9 +165,9 @@ namespace ToDoListFunctionsTest
 
             cleanHouse.TaskIsCompleted(cleanHouse);
             Assert.AreEqual(false, cleanHouse.TaskIsCompleted(cleanHouse));
-            cleanHouse.ListItemCompleted("Mop");
-            cleanHouse.ListItemCompleted("Sweep");
-            cleanHouse.ListItemCompleted("Dust");
+            cleanHouse.ListItemCompleted(cleanHouse, "Mop");
+            cleanHouse.ListItemCompleted(cleanHouse, "Sweep");
+            cleanHouse.ListItemCompleted(cleanHouse, "Dust");
             Assert.AreEqual(true, cleanHouse.TaskIsCompleted(cleanHouse));
             Assert.AreEqual(3, cleanHouse.ItemListCompletedCount);
 
@@ -299,14 +299,112 @@ namespace ToDoListFunctionsTest
 
         }
         [TestMethod]
+        public void CheckSortByCompletionStatusisCorrect()
+        {
+            UniqueList<TaskList<string>> toDoList = new UniqueList<TaskList<string>>();
+            TaskList<string> cleanHouse = new TaskList<string>();
+            TaskList<string> walkDogs = new TaskList<string>();
+            TaskList<string> goToGym = new TaskList<string>();
+            cleanHouse.Add("Mop"); //listitems
+            cleanHouse.Add("Sweep");
+            cleanHouse.Add("Dust");
+            toDoList.Add(cleanHouse);
+
+            walkDogs.Add("Morning"); //listitems
+            walkDogs.Add("Lunch");
+            walkDogs.Add("Evening");
+            toDoList.Add(walkDogs);
+
+            goToGym.Add("Arms"); //listitems
+            goToGym.Add("Chest");
+            goToGym.Add("Back");
+            toDoList.Add(goToGym);
+
+            walkDogs.ListItemCompleted(walkDogs, "Morning");
+            walkDogs.ListItemCompleted(walkDogs, "Lunch");
+            walkDogs.ListItemCompleted(walkDogs, "Dinner");
+
+
+            cleanHouse.ListItemCompleted(cleanHouse, "Mop");
+            cleanHouse.ListItemCompleted(cleanHouse, "Dust");
+
+
+            goToGym.ListItemCompleted(goToGym, "Back");
+
+            toDoList.Add(cleanHouse);
+            toDoList.Add(walkDogs);
+            toDoList.Add(goToGym);
+            toDoList.SortByCompletionStatus(toDoList);
+
+            Assert.AreEqual(100.00M, walkDogs.CompletionPercentage);
+            Assert.AreEqual(66.67M, cleanHouse.CompletionPercentage);
+            Assert.AreEqual(33.33M, goToGym.CompletionPercentage);
+        }
+        [TestMethod]
         public void SortTaskByCompletionStatus()
         {
-            //Easy to create this method
+            UniqueList<TaskList<string>> toDoList = new UniqueList<TaskList<string>>();
+            TaskList<string> cleanHouse = new TaskList<string>();
+            TaskList<string> walkDogs = new TaskList<string>();
+            TaskList<string> goToGym = new TaskList<string>();
+            cleanHouse.Add("Mop"); //listitems
+            cleanHouse.Add("Sweep");
+            cleanHouse.Add("Dust");
+            toDoList.Add(cleanHouse);
+
+            walkDogs.Add("Morning"); //listitems
+            walkDogs.Add("Lunch");
+            walkDogs.Add("Evening");
+            toDoList.Add(walkDogs);
+
+            goToGym.Add("Arms"); //listitems
+            goToGym.Add("Chest");
+            goToGym.Add("Back");
+            toDoList.Add(goToGym);
+
+            walkDogs.ListItemCompleted(walkDogs, "Morning");
+            walkDogs.ListItemCompleted(walkDogs, "Lunch");
+            walkDogs.ListItemCompleted(walkDogs, "Dinner");
+
+
+            cleanHouse.ListItemCompleted(cleanHouse, "Mop");
+            cleanHouse.ListItemCompleted(cleanHouse, "Dust");
+
+
+            goToGym.ListItemCompleted(goToGym, "Back");
+
+            toDoList.Add(cleanHouse);
+            toDoList.Add(walkDogs);
+            toDoList.Add(goToGym);
+            toDoList.SortByCompletionStatus(toDoList);
+
+            Assert.AreEqual(goToGym, toDoList[2]);
+            Assert.AreEqual(cleanHouse, toDoList[1]);
+            Assert.AreEqual(walkDogs, toDoList[0]);
         }
         [TestMethod]
         public void SearchForATask()
         {
-            //Can use .Contains or IndexOf here :)
+            UniqueList<TaskList<string>> toDoList = new UniqueList<TaskList<string>>();
+            TaskList<string> cleanHouse = new TaskList<string>();
+            TaskList<string> walkDogs = new TaskList<string>();
+            TaskList<string> goToGym = new TaskList<string>();
+            cleanHouse.Add("Mop"); //listitems
+            cleanHouse.Add("Sweep");
+            cleanHouse.Add("Dust");
+            toDoList.Add(cleanHouse);
+
+            walkDogs.Add("Morning"); //listitems
+            walkDogs.Add("Lunch");
+            walkDogs.Add("Evening");
+            toDoList.Add(walkDogs);
+
+            goToGym.Add("Arms"); //listitems
+            goToGym.Add("Chest");
+            goToGym.Add("Back");
+            toDoList.Add(goToGym);
+
+            
         }
         #endregion
         #region Viewing Tasks

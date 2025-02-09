@@ -16,11 +16,13 @@ namespace ToDoListFunctions
     {
         public int ItemListCompletedCount { get; set; }
         public bool IsCompleted { get; set; } = false;
+        public decimal CompletionPercentage { get; set; }
         public string DueDate { get; set; } = null;
         public DateTime DueDateActual { get; set; }
         public TaskPriority Priority { get; set; }
         public DateTime DateModified { get; set; }
         public DateTime DateCreated { get; set; }
+        public List<T> ListItems { get; set; } = new List<T>();
 
         public TaskList()
         {
@@ -40,14 +42,18 @@ namespace ToDoListFunctions
             }
         }
 
-        public int ListItemCompleted(T item)
+        public void ListItemCompleted(TaskList<T> taskList, T item)
         {
-            return ItemListCompletedCount++;
+            ItemListCompletedCount++;
+            TaskCompletionPercentage(taskList);
+            TaskIsCompleted(taskList);
         }
 
-        public int ListItemIncompleted(T item)
+        public void ListItemIncompleted(TaskList<T> taskList, T item)
         {
-            return ItemListCompletedCount--;
+            ItemListCompletedCount--;
+            TaskCompletionPercentage(taskList);
+            TaskIsCompleted(taskList);
         }
 
         public bool TaskIsCompleted(TaskList<T> taskList)
@@ -58,6 +64,12 @@ namespace ToDoListFunctions
             }
 
             return IsCompleted = false;
+        }
+
+        public void TaskCompletionPercentage(TaskList<T> taskList)
+        {
+            decimal percentageCompleted = Math.Round((decimal)ItemListCompletedCount / taskList.Count * 100, 2);
+            CompletionPercentage = percentageCompleted;
         }
     }
 

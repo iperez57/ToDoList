@@ -4,6 +4,7 @@ using ToDoListFunctions;
 
 public class UniqueList<T> : List<T>
 {
+    public List<T> Tasks { get; set; } = new List<T>();
     public new bool Add(T item)
     {
         if (this.Contains(item))
@@ -40,6 +41,22 @@ public class UniqueList<T> : List<T>
             for (int j = i + 1; j < toDoList.Count; j++) // j should start at i+1
             {
                 if (toDoList[i].DueDateActual > toDoList[j].DueDateActual)
+                {
+                    var placeholder = toDoList[i];
+                    toDoList[i] = toDoList[j];
+                    toDoList[j] = placeholder;
+                }
+            }
+        }
+    }
+
+    public void SortByCompletionStatus(UniqueList<TaskList<string>> toDoList)
+    {
+        for (int i = 0; i < toDoList.Count; i++)
+        {
+            for (int j = i + 1; j < toDoList.Count; j++) // j should start at i+1
+            {
+                if (toDoList[i].CompletionPercentage < toDoList[j].CompletionPercentage)
                 {
                     var placeholder = toDoList[i];
                     toDoList[i] = toDoList[j];
