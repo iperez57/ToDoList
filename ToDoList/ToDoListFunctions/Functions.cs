@@ -4,7 +4,6 @@ using ToDoListFunctions;
 
 public class UniqueList<T> : List<T>
 {
-    public List<T> Tasks { get; set; } = new List<T>();
     public new bool Add(T item)
     {
         if (this.Contains(item))

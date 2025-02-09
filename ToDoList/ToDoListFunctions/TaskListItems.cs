@@ -22,7 +22,6 @@ namespace ToDoListFunctions
         public TaskPriority Priority { get; set; }
         public DateTime DateModified { get; set; }
         public DateTime DateCreated { get; set; }
-        public List<T> ListItems { get; set; } = new List<T>();
 
         public TaskList()
         {

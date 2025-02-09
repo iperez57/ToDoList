@@ -15,6 +15,7 @@ namespace ToDoListFunctionsTest
             Assert.IsNotNull(toDoList);
             Assert.IsNotNull(cleanHouse);
         }
+        [TestMethod]
         public void CreateSingleNewTaskListinToDoList()
         {
             UniqueList<TaskList<string>> toDoList = new UniqueList<TaskList<string>>();
@@ -23,6 +24,7 @@ namespace ToDoListFunctionsTest
             Assert.IsNotNull(cleanHouse);
             Assert.AreEqual(1, toDoList.Count);
         }
+        [TestMethod]
         public void CreateMultipleNewTaskListinToDoList()
         {
             UniqueList<TaskList<string>> toDoList = new UniqueList<TaskList<string>>();
@@ -33,7 +35,6 @@ namespace ToDoListFunctionsTest
             Assert.IsNotNull(payBills);
             Assert.IsNotNull(cleanHouse);
         }
-        //Step 2
         [TestMethod]
         public void AddAListItemsToATaskList()
         {
@@ -383,7 +384,7 @@ namespace ToDoListFunctionsTest
             Assert.AreEqual(walkDogs, toDoList[0]);
         }
         [TestMethod]
-        public void SearchForATask()
+        public void ToDoListContainsTask()
         {
             UniqueList<TaskList<string>> toDoList = new UniqueList<TaskList<string>>();
             TaskList<string> cleanHouse = new TaskList<string>();
@@ -404,17 +405,10 @@ namespace ToDoListFunctionsTest
             goToGym.Add("Back");
             toDoList.Add(goToGym);
 
-            
-        }
-        #endregion
-        #region Viewing Tasks
-        [TestMethod]
-        public void ViewAllTasks()
-        {
-            //Just have to print out List
+            Assert.IsTrue(toDoList.Contains(cleanHouse));
+            Assert.IsTrue(toDoList.Contains(walkDogs));
+            Assert.IsTrue(toDoList.Contains(goToGym));
         }
         #endregion
     }
 }
-
-//todo list: fix task management test cases, finish test task attributes tomorrow
