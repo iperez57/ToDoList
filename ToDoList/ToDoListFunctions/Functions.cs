@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
-//Created a new class that inherits from List<T>
-//Making this new class will allow us to add new methods to the List<T> class that do not retain duplicate items
-//Originally had it as just UniqueList but then we didn't have access to the List<T> methods (.Add, Remove, etc.)
-//I did ask copilot for help with this. Let's try to speed up our development process and use copilot to help us
+using ToDoListFunctions;
 
 public class UniqueList<T> : List<T>
 {
@@ -20,4 +16,53 @@ public class UniqueList<T> : List<T>
             return true; // Item added successfully
         }
     }
+
+    public void SortByPriority(UniqueList<TaskList<string>> toDoList)
+    {
+        for (int i = 0; i < toDoList.Count; i++)
+        {
+            for (int j = i + 1; j < toDoList.Count; j++) // j should start at i+1
+            {
+                if (toDoList[i].Priority < toDoList[j].Priority)
+                {
+                    var placeholder = toDoList[i];
+                    toDoList[i] = toDoList[j];
+                    toDoList[j] = placeholder;
+                }
+            }
+        }
+    }
+
+    public void SortByDueDate(UniqueList<TaskList<string>> toDoList)
+    {
+        for (int i = 0; i < toDoList.Count; i++)
+        {
+            for (int j = i + 1; j < toDoList.Count; j++) // j should start at i+1
+            {
+                if (toDoList[i].DueDateActual > toDoList[j].DueDateActual)
+                {
+                    var placeholder = toDoList[i];
+                    toDoList[i] = toDoList[j];
+                    toDoList[j] = placeholder;
+                }
+            }
+        }
+    }
+
+    public void SortByCompletionStatus(UniqueList<TaskList<string>> toDoList)
+    {
+        for (int i = 0; i < toDoList.Count; i++)
+        {
+            for (int j = i + 1; j < toDoList.Count; j++) // j should start at i+1
+            {
+                if (toDoList[i].CompletionPercentage < toDoList[j].CompletionPercentage)
+                {
+                    var placeholder = toDoList[i];
+                    toDoList[i] = toDoList[j];
+                    toDoList[j] = placeholder;
+                }
+            }
+        }
+    }
+
 }
